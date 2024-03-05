@@ -41,6 +41,7 @@ public final class Constants {
     public static final String PROP_BUILD_DATE = "ro.build.date.utc";
     public static final String PROP_BUILD_VERSION = "ro.modversion";
     public static final String PROP_DEVICE = "ro.crdroid.device";
+    public static final String OTA_URL = "https://raw.githubusercontent.com/GuidixX/android_vendor_crDroidOTA/11.0/spes.json";
     public static final String PROP_NEXT_DEVICE = "ro.updater.next_device";
     public static final String PROP_UPDATER_ALLOW_DOWNGRADING = "crdroid.updater.allow_downgrading";
 
