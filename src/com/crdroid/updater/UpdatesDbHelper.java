@@ -42,7 +42,6 @@ public class UpdatesDbHelper extends SQLiteOpenHelper {
         public static final String COLUMN_NAME_TYPE = "type";
         public static final String COLUMN_NAME_VERSION = "version";
         public static final String COLUMN_NAME_SIZE = "size";
-        public static final String COLUMN_NAME_CHANGELOG = "changelog";
     }
 
     private static final String SQL_CREATE_ENTRIES =
@@ -54,8 +53,7 @@ public class UpdatesDbHelper extends SQLiteOpenHelper {
                     UpdateEntry.COLUMN_NAME_TIMESTAMP + " INTEGER," +
                     UpdateEntry.COLUMN_NAME_TYPE + " TEXT," +
                     UpdateEntry.COLUMN_NAME_VERSION + " TEXT," +
-                    UpdateEntry.COLUMN_NAME_SIZE + " INTEGER)"; +
-                    UpdateEntry.COLUMN_NAME_CHANGELOG + " TEXT NOT NULL UNIQUE,"
+                    UpdateEntry.COLUMN_NAME_SIZE + " INTEGER)";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + UpdateEntry.TABLE_NAME;
@@ -92,7 +90,6 @@ public class UpdatesDbHelper extends SQLiteOpenHelper {
         values.put(UpdateEntry.COLUMN_NAME_TYPE, update.getType());
         values.put(UpdateEntry.COLUMN_NAME_VERSION, update.getVersion());
         values.put(UpdateEntry.COLUMN_NAME_SIZE, update.getFileSize());
-        values.put(UpdateEntry.COLUMN_NAME_CHANGELOG, update.getChangelog());
     }
 
     public void removeUpdate(String downloadId) {
@@ -130,7 +127,6 @@ public class UpdatesDbHelper extends SQLiteOpenHelper {
                 UpdateEntry.COLUMN_NAME_VERSION,
                 UpdateEntry.COLUMN_NAME_STATUS,
                 UpdateEntry.COLUMN_NAME_SIZE,
-                UpdateEntry.COLUMN_NAME_CHANGELOG,
         };
         String sort = UpdateEntry.COLUMN_NAME_TIMESTAMP + " DESC";
         Cursor cursor = db.query(UpdateEntry.TABLE_NAME, projection, selection, selectionArgs,
@@ -155,8 +151,6 @@ public class UpdatesDbHelper extends SQLiteOpenHelper {
                 index = cursor.getColumnIndex(UpdateEntry.COLUMN_NAME_SIZE);
                 update.setFileSize(cursor.getLong(index));
                 updates.add(update);
-                index = cursor.getColumnIndex(UpdateEntry.COLUMN_NAME_CHANGELOG);
-                update.setChangelog(cursor.getString(index));
             }
             cursor.close();
         }
